@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+using namespace std;
+
 int main() {
     // Get full screen resolution
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -8,20 +10,20 @@ int main() {
 
     sf::Font font;
     if (!font.loadFromFile("assets/Jersey15-Regular.ttf")) {
-        std::cerr << "Couldn't load font\n";
+        cerr << "Couldn't load font\n";
         return -1;
     }
 
     const int menuSize = 2;
-    sf::Text title("Doggo Shelter", font, 70);
+    sf::Text title("Doggo Shelter", font, 60);
     sf::Text menu[menuSize];
-    std::string options[menuSize] = { "NEW GAME", "EXIT" };
+    string options[menuSize] = { "NEW GAME", "EXIT" };
     int selectedIndex = 0;
 
     // Center the title
     sf::FloatRect titleBounds = title.getLocalBounds();
     title.setOrigin(titleBounds.width / 2, titleBounds.height / 2);
-    title.setPosition(desktop.width / 2.0f, 100);
+    title.setPosition(desktop.width / 2.0f, desktop.height / 4);
     title.setFillColor(sf::Color::White);
 
     // Setup menu options
@@ -31,8 +33,8 @@ int main() {
         menu[i].setCharacterSize(48);
         sf::FloatRect bounds = menu[i].getLocalBounds();
         menu[i].setOrigin(bounds.width / 2, bounds.height / 2);
-        menu[i].setPosition(desktop.width / 2.0f, 250 + i * 80);
-        menu[i].setFillColor(i == selectedIndex ? sf::Color::Yellow : sf::Color::White);
+        menu[i].setPosition(desktop.width / 2.0f, desktop.height /2 + i * 80);
+        menu[i].setFillColor(i == selectedIndex ? sf::Color::Green : sf::Color::White);
     }
 
     while (window.isOpen()) {
@@ -59,7 +61,6 @@ int main() {
                     selectedIndex = (selectedIndex + 1) % menuSize;
                 } else if (event.key.code == sf::Keyboard::Enter) {
                     if (selectedIndex == 0) {
-                        std::cout << "New Game\n";
                     } else if (selectedIndex == 1) {
                         window.close();
                     }
@@ -71,7 +72,6 @@ int main() {
                 for (int i = 0; i < menuSize; ++i) {
                     if (menu[i].getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
                         if (i == 0) {
-                            std::cout << "New Game (clicked)\n";
                             // gameplay here
                         } else if (i == 1) {
                             window.close();
@@ -83,7 +83,7 @@ int main() {
 
         // Update colors
         for (int i = 0; i < menuSize; ++i) {
-            menu[i].setFillColor(i == selectedIndex ? sf::Color::Yellow : sf::Color::White);
+            menu[i].setFillColor(i == selectedIndex ? sf::Color::Green : sf::Color::White);
         }
 
         window.clear(sf::Color::Black);
