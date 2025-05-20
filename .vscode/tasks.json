@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Game",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "source/main.cpp",
+        "-o", "DoggoShelter.exe",
+        "-ID:/SFML-2.5.1/include",
+        "-LD:/SFML-2.5.1/lib",
+        "-lsfml-graphics",
+        "-lsfml-window",
+        "-lsfml-system"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Kompilacja gry z użyciem SFML"
+    }
+  ]
+}
